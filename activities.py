@@ -20,12 +20,12 @@ import sys
 import os
 
 def printStack(app_name):
-    lines= out.split('\n')
+    lines= out.decode('utf-8').split('\n')
     curr_pkg = ""
     compiled1 = re.compile("Run .*?HistoryRecord{\S+\s(" + app_name + ")/\\.(.*?)\\}")
     compiled2 = re.compile("Run .*?ActivityRecord{\S+\s(" + app_name + ")/\\.(.*?)\\}")
-    print "======== Activity Stack =========="
-    for i in xrange(len(lines)):
+    print ("======== Activity Stack ==========")
+    for i in range(len(lines)):
         activity=re.findall(compiled1,lines[i])
         if not activity:
             activity=re.findall(compiled2,lines[i])
@@ -33,16 +33,16 @@ def printStack(app_name):
         if (activity):
             if curr_pkg != activity[0][0]:
                 curr_pkg = activity[0][0]
-                print curr_pkg 
-            print "\t" + activity[0][1]
-    print "=================================="
+                print (curr_pkg) 
+            print ("\t" + activity[0][1])
+    print ("==================================")
     
-print '              **********************************'
-print '              *      Activity stack viewer     *'
-print '              *                                *'
-print '              *       Written by Udi Cohen     *'
-print '              *       http://www.udinic.com    *'
-print '              **********************************'
+print ('              **********************************')
+print ('              *      Activity stack viewer     *')
+print ('              *                                *')
+print ('              *       Written by Udi Cohen     *')
+print ('              *       http://www.udinic.com    *')
+print ('              **********************************')
 print
 print
 
@@ -60,4 +60,4 @@ if len(sys.argv) > 1:
 printStack(app)
 
 print
-raw_input("\nPress ENTER to exit")                                
+input("\nPress ENTER to exit")                                

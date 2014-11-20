@@ -18,12 +18,12 @@ import re
 from subprocess import *
 import sys, pprint
 
-print '              **********************************'
-print '              *      Android Alarms Dumper     *'
-print '              *                                *'
-print '              *       Written by Udi Cohen     *'
-print '              *       http://www.udinic.com    *'
-print '              **********************************'
+print ('              **********************************')
+print ('              *      Android Alarms Dumper     *')
+print ('              *                                *')
+print ('              *       Written by Udi Cohen     *')
+print ('              *       http://www.udinic.com    *')
+print ('              **********************************')
 print
 print
 
@@ -36,10 +36,10 @@ p.wait()
 
 pp = pprint.PrettyPrinter(indent=4)
         
-lines= out.split('\n')
+lines= out.decode('utf-8').split('\n')
 alerts = [["RTC TYPE", "When", "Repeat", "pkg", "Type"]]
 
-for i in xrange(len(lines)):
+for i in range(len(lines)):
     if lines[i].replace(" ","")[:3]=="RTC":
 
         # Extract the information we
@@ -59,18 +59,18 @@ for i in xrange(len(lines)):
 out_lines = [""] * len(alerts)
 
 # Format the data nicely to columns
-for column in xrange(len(alerts[0])):
+for column in range(len(alerts[0])):
 
-    for alert_index in xrange(len(alerts)):
+    for alert_index in range(len(alerts)):
         out_lines[alert_index] += str(alerts[alert_index][column])
 
     line_size = max(map(len, out_lines)) + 5
 
-    for alert_index in xrange(len(alerts)):
+    for alert_index in range(len(alerts)):
         out_lines[alert_index] += " " * (line_size - len(out_lines[alert_index]))
 
 for l in out_lines:
-    print l
+    print (l)
 
 print	
-raw_input("Press ENTER to exit")
+input("Press ENTER to exit")
