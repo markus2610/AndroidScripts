@@ -19,37 +19,39 @@ from subprocess import *
 import sys
 import os
 
+
 def printStack(app_name):
-    lines= out.decode('utf-8').split('\n')
+    lines = out.decode('utf-8').split('\n')
     curr_pkg = ""
     compiled1 = re.compile("Run .*?HistoryRecord{\S+\s(" + app_name + ")/\\.(.*?)\\}")
     compiled2 = re.compile("Run .*?ActivityRecord{\S+\s(" + app_name + ")/\\.(.*?)\\}")
-    print ("======== Activity Stack ==========")
+    print("======== Activity Stack ==========")
     for i in range(len(lines)):
-        activity=re.findall(compiled1,lines[i])
+        activity = re.findall(compiled1, lines[i])
         if not activity:
-            activity=re.findall(compiled2,lines[i])
-            
+            activity = re.findall(compiled2, lines[i])
+
         if (activity):
             if curr_pkg != activity[0][0]:
                 curr_pkg = activity[0][0]
-                print (curr_pkg) 
-            print ("\t" + activity[0][1])
-    print ("==================================")
-    
-print ('              **********************************')
-print ('              *      Activity stack viewer     *')
-print ('              *                                *')
-print ('              *       Written by Udi Cohen     *')
-print ('              *       http://www.udinic.com    *')
-print ('              **********************************')
+                print(curr_pkg)
+            print("\t" + activity[0][1])
+    print("==================================")
+
+
+print('              **********************************')
+print('              *      Activity stack viewer     *')
+print('              *                                *')
+print('              *       Written by Udi Cohen     *')
+print('              *       http://www.udinic.com    *')
+print('              **********************************')
 print
 print
 
-p=subprocess.Popen([r'adb', 'shell', 'dumpsys activity activities'],
-                       stdout=PIPE, stderr=PIPE,
-                       shell= True,
-                       cwd=os.getenv("HOME"))
+p = subprocess.Popen([r'adb', 'shell', 'dumpsys activity activities'],
+                     stdout=PIPE, stderr=PIPE,
+                     shell=True,
+                     cwd=os.getenv("HOME"))
 out, err = p.communicate()
 p.wait()
 
